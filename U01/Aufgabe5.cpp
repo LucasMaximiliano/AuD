@@ -1,0 +1,33 @@
+/*
+ANMERKUNGEN:
+Diese Aufgabe wurde auf Algonautin gelöst.
+Das überprüfen des Codes ist nur auf der Website möglich.
+*/
+
+/*
+#include "labyrinth.h"
+
+void findeAusgang() {
+	static int zaehler = 0;
+	char x = geheGeradeaus();
+	if(x == 'A')
+		return;
+	else if(x == '_')
+	{
+		if(zaehler == 0)
+			findeAusgang();
+		else
+		{
+			dreheRechts();
+			zaehler -= 1;
+			findeAusgang();
+		}
+	}
+	else if(x == 'X')
+	{
+		dreheLinks();
+		zaehler += 1;
+		findeAusgang();
+	}
+}
+*/
