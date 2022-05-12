@@ -1,0 +1,21 @@
+/* PSEUDOCODE:
+ * g_tailrec(x,y)
+ *      if x<10
+ *          return pow(x,y)
+ *      else
+ *          return pow(x%10,y) + g_tailrec(x/10,y+1)
+ * 
+ * helper(x,y)
+ *      
+ */
+
+#include <stdio.h>
+#include <math.h>
+
+//...
+
+int main()
+{
+    
+    return 0;
+}

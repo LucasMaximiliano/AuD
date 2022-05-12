@@ -1,0 +1,9 @@
+/*
+PSEUDOCODE:
+shift(*string, laenge, shift)
+    for(int i=laenge; i>0; i--)
+        if( ( (i-1)-(shift+1) ) >= 0)        //laenge-1 ist laenge des Strings ohne \0
+            char buff = string[]
+        else
+            ...
+*/

@@ -21,17 +21,14 @@ void reverse_iterative(int* array, const int laenge)
 
 void reverse_recursive(int* array, const int laenge)
 {
-    static int org_laenge = laenge;
-    if(laenge == org_laenge/2)
+    if(laenge == 1)
         return;
     else
     {
-        static int count = 0;
         int buff = array[laenge-1];
-        array[laenge-1] = array[count];
-        array[count] = buff;
-        count++;
-        reverse_recursive(array, laenge-1);
+        array[laenge-1] = array[0];
+        array[0] = buff;
+        reverse_recursive(array+1, laenge-2);     //array+1
     }
 }
 
