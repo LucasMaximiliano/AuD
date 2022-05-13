@@ -4,7 +4,6 @@ Diese Aufgabe wurde auf Algonautin gelöst.
 Das überprüfen des Codes ist nur auf der Website möglich.
 */
 
-/*
 #include "labyrinth.h"
 
 void findeAusgang() {
@@ -30,4 +29,3 @@ void findeAusgang() {
 		findeAusgang();
 	}
 }
-*/

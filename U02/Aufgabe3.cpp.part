@@ -3,10 +3,10 @@
  *      if x<10
  *          return pow(x,y)
  *      else
- *          return pow(x%10,y) + g_tailrec(x/10,y+1)
+ *          return sum = helper(x/10,y+1)
  * 
- * helper(x,y)
- *      
+ * helper(x,y,sum)
+ *      return pow(x%10,y) + sum
  */
 
 #include <stdio.h>

@@ -1,9 +1,16 @@
 /*
 PSEUDOCODE:
-heron_verfahren(a,e)
+heron_verfahren_iterativ(a,e)
     x = (a+1)/2
+    do
+        x_alt = x
+        x = ( (x_alt+a) / x_alt ) / 2
+    while (|x_alt-x|>e)
+
+heron_verfahren_rekursiv(a,e)   //fertig machen...
+    x = (a+1)/2 
     if(|x-a|<=e)
         return x
     else
-        heron_verfahren(x,)
+        heron_verfahren_rekkursiv(x,e)
 */
