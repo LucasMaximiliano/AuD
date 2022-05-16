@@ -1,4 +1,4 @@
-SRCS=$(wildcard *.cpp)
+SRCS=$(wildcard */*.cpp)
 ELFS=$(patsubst %.cpp,%,$(SRCS))
 
 all: $(ELFS)
