@@ -8,9 +8,12 @@
  *		return -4/(2*n+1) + pi(n-1)
  */
 
-#include<stdio.h>
+#include <stdio.h>
+#include <math.h>
 
-float pi(const int  n)
+/*
+MEINE LOESUNG (NICHT OPTIMAL):
+float pi(const int n)
 {
 	if(n==0)
 		return 4;
@@ -18,6 +21,15 @@ float pi(const int  n)
 		return 4.0/(2*n+1) + pi(n-1);
 	else
 		return -4.0/(2*n+1) + pi(n-1);
+}
+*/
+
+float pi(const int n)
+{
+	if(n==0)
+		return 4;
+	else
+		return pow(-1,n) * 4.0/(2*n+1) + pi(n-1);
 }
 
 int main()

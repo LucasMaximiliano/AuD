@@ -12,13 +12,13 @@
 
 #include <stdio.h>
 
-int binomial_koeffizient(const int n, const int k)
+long long binomial_koeffizient(const int n, const int k)
 {
 	if(n==k || k==0)
 		return 1;
 	else
 	{
-		static int ergebnisse[1000][1000];	//[0] wird nicht benutzt
+		static long long ergebnisse[1000][1000];	//[0] wird nicht benutzt
 		if(ergebnisse[n][k]!=0)
 			return ergebnisse[n][k];
 		else

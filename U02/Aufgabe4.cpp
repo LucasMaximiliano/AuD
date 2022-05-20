@@ -18,15 +18,7 @@
  *	    	return true
  * c)
  * sum(ptr1,ptr2)
- * 	if(ptr1->next!=NULL && ptr2->next!=NULL)
- * 		if(ptr1->koeff + ptr2->koeff != 0)
- * 			new_p = new PolynomNode(ptr1->koeff + ptr2->koeff, ptr1->exp, NULL)
- * 			append(p_head,new_p)
- * 			sum(ptr1->next, ptr2->next)
- * 	else
- * 		
- * 		new_p = new PolynomNode(ptr1->koeff + ptr2->koeff, ptr1->exp, NULL)
- * 		append(p_head,new_p)
+ * 	...direkt in Code geschriben...
  */
 
 #include <stdio.h>
@@ -52,6 +44,24 @@ int length(PolynomNode* &ptr)
 		return 1;
 	else
 		return 1+length(ptr->next);
+}
+
+void loeschen(PolynomNode* &ptr, const int n)
+{
+    //...
+}
+
+void print(PolynomNode* &ptr)
+{
+    if(ptr==NULL)
+        printf("NULL\n");
+    else if(ptr->next==NULL)
+        printf("%dx^%d\n", ptr->koeff, ptr->exp);
+    else
+    {
+        printf("%dx^%d + ", ptr->koeff, ptr->exp);
+        print(ptr->next);
+    }
 }
 
 //FUNKTION IMPLEMENTIERUNGEN:
@@ -80,52 +90,98 @@ bool equal(PolynomNode* &ptr1, PolynomNode* &ptr2)
 	}
 }
 
-
 PolynomNode* sum(PolynomNode* &ptr1, PolynomNode* &ptr2)
 {
-	if(ptr1->next!=NULL && ptr2->next!=NULL)
-	{
- 		if(ptr1->koeff + ptr2->koeff != 0)
-		{
- 			PolyomNode* new_p = new PolynomNode(ptr1->koeff + ptr2->koeff, ptr1->exp, NULL);
- 			//...
-			help_sum(ptr1->next, ptr2->next, &new_p);
-		}
-	}
-	else 		
-		
-
-	return &new_p;
+    //Ende der Liste:
+    if(ptr1==NULL && ptr2==NULL)
+        return NULL;
+    else
+    {
+        //Beide ptr existieren:
+        if(ptr1!=NULL && ptr2!=NULL)
+        {
+            //exp sind gleich:
+            if(ptr1->exp==ptr2->exp)
+            {
+                PolynomNode* new_p = new PolynomNode(ptr1->koeff + ptr2->koeff, ptr1->exp, NULL);
+                return new_p->next = sum(ptr1->next,ptr2->next);
+            }
+            //Kleineres exp kommt zuerst:
+            else if(ptr1->exp < ptr2->exp)
+            {
+                //Kleineres ptr wird verschoeben; anderer bleibt:
+                PolynomNode* new_p = new PolynomNode(ptr1->koeff, ptr1->exp, NULL);
+                return new_p->next = sum(ptr1->next,ptr2);
+            }
+            else
+            {
+                //Kleineres ptr wird verschoeben; anderer bleibt:
+                PolynomNode* new_p = new PolynomNode(ptr2->koeff, ptr2->exp, NULL);
+                return new_p->next = sum(ptr1,ptr2->next);
+            }
+        }
+        //ptr1 existiert:
+        else if(ptr1!=NULL)
+        {
+            //Restliste von ptr1 kopieren:
+            PolynomNode* new_p = new PolynomNode(ptr1->koeff, ptr1->exp, NULL);
+            return new_p->next = sum(ptr1->next,ptr2);
+        }
+        //ptr2 existiert:
+        else
+        {
+            //Restliste von ptr2 kopieren:
+            PolynomNode* new_p = new PolynomNode(ptr2->koeff, ptr2->exp, NULL);
+            return new_p->next = sum(ptr1,ptr2->next);
+        }
+    }
 }
+
+PolynomNode* add(PolynomNode* &ptr1, PolynomNode* &ptr2)
+{
+    //Nullelemente loeschen:
+    return loeschen(sum(ptr1,ptr2), 0);
+}
+
 
 //MAIN:
 int main()
 {
-    struct PolynomNode p3(3,3,NULL);
-    struct PolynomNode p2(2,2,&p3);
-    struct PolynomNode p1(1,1,&p2);
-    struct PolynomNode *pol1 = &p1;     //Polynom: p = x + 2x² + 3x³
+    struct PolynomNode p1(1,1,NULL);
+    struct PolynomNode p2(2,2,&p1);
+    struct PolynomNode p3(3,3,&p2);
+    struct PolynomNode *pol1 = &p3;     //Polynom: pol1 = 3x³ + 2x² + x
 
     printf("%d\n", get(pol1,2) );
 
 
-    struct PolynomNode p6(3,3,NULL);
-    struct PolynomNode p5(2,2,&p6);
-    struct PolynomNode p4(1,1,&p5);
-    struct PolynomNode *pol2 = &p4;     //pol1 == pol2
+    struct PolynomNode p4(1,1,NULL);
+    struct PolynomNode p5(2,2,&p4);
+    struct PolynomNode p6(3,3,&p5);
+    struct PolynomNode *pol2 = &p6;     //pol1 == pol2
     printf("%d\n", equal(pol1,pol2) );
 
-    struct PolynomNode p9(6,3,NULL);
-    struct PolynomNode p8(5,2,&p9);
-    struct PolynomNode p7(4,1,&p8);
-    struct PolynomNode *pol3 = &p7;     //pol1 != pol3
+    struct PolynomNode p7(4,1,NULL);
+    struct PolynomNode p8(5,2,&p7);
+    struct PolynomNode p9(6,3,&p8);
+    struct PolynomNode *pol3 = &p9;     //pol1 != pol3 (6x³ + 5x² + 4x)
     printf("%d\n", equal(pol1,pol3) );
     
     struct PolynomNode p10(10,1,NULL);
-    struct PolynomNode *pol4 = &p10;     //pol1 != pol4
+    struct PolynomNode *pol4 = &p10;     //pol1 != pol4 (10x)
     printf("%d\n", equal(pol1,pol4) );
     
-    
+
+    struct PolynomNode *pol5 = sum(pol3,pol4);      //pol5 = pol3 + pol4 (14x)
+    print(pol5);
+
+    struct PolynomNode p11(-4,1,NULL);
+    struct PolynomNode p12(-5,2,&p11);
+    struct PolynomNode p13(-6,3,&p12);
+    struct PolynomNode *pol6 = &p13;     //pol6 = -pol3
+    struct PolynomNode *pol7 = sum(pol3,pol6);      //pol7 = pol3 + pol6 (NULL)
+    print(pol7);
 
     return 0;
 }
+//marco.nanka

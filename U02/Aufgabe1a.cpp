@@ -8,12 +8,12 @@
 
 #include <stdio.h>
 
-int berechne_Cn(const int n)
+float berechne_Cn(const int n)
 {
 	if(n==1)
 		return 1;
 	else
-		return ( (4*n-2)/(n+1) ) * berechne_Cn(n-1);
+		return ( (4.0*n-2)/(n+1.0) ) * berechne_Cn(n-1);
 }
 
 int main()
