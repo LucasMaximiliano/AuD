@@ -1,21 +1,3 @@
-/*
- * PSEUDOCODE:
- * 1te Versuch (Listenelemente loeschen):
- * josephus(n,k)
- *      if(n==1)
- *          head = ptr                  //head am Ende anpassen
- *          return head->index
- *      else
- *          static ptr = head
- *          while(ptr->next->next->index!=k)
- *              ptr = ptr->next         //ptr zeigt auf Element links des zu loeschenden Element
- *          printf(ptr->next)
- *          loeschen(ptr->next)
- *          josephus(n-1,ptr->index)
- * 2te Versuch (Listenelemente markieren, aber nicht explizit loeschen):
- * 
-*/
-
 #include <stdio.h>
 
 // KLASSEN & STRUKTUREN:
@@ -93,7 +75,6 @@ int main()
     zyklische_Liste l1 = zyklische_Liste(&e1);
 
     printf("Josephus war in der Position %d.\n", l1.josephus(7,3) );
-    
 
     return 0;
 }
