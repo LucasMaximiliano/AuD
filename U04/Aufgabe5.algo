@@ -1,0 +1,11 @@
+#include "ueberfluss.h"
+
+void ueberfluss() {
+	/*
+	555 tickets: 0000001000101011
+	+ ? tickets: 1111110111011010 (=64986)
+	--------------------------------------
+	5 tickets:(1)1000000000000101
+	*/
+	bucheTickets(64986);
+}
